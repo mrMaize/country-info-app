@@ -1,6 +1,4 @@
-export const host = {
-    API_HOST: 'https://mfc.aitne.ru/api'
-};
+export const API_HOST = "https://restcountries.eu/rest/v2";
 
 export const requestTypes = {
     GET: 'GET',
