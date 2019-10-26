@@ -1,51 +1,51 @@
-export const locale = {
+export const locales = {
   RU: "RU",
   EN: "EN"
 };
 
 export const layoutText = {
   CHANGE_LANGUAGE: {
-    [locale.EN]: "Change language...",
-    [locale.RU]: "Сменить язык"
+    [locales.EN]: "Change language...",
+    [locales.RU]: "Сменить язык"
   },
 
   LOADING: {
-    [locale.EN]: "Loading...",
-    [locale.RU]: "Загрузка..."
+    [locales.EN]: "Loading...",
+    [locales.RU]: "Загрузка..."
   },
 
   SEARCH_PLACEHOLDER: {
-    [locale.EN]: "Start typing name",
-    [locale.RU]: "Начните вводить название страны"
+    [locales.EN]: "Start typing name",
+    [locales.RU]: "Начните вводить название страны"
   },
 
   COUNTRY_NAME: {
-    [locale.EN]: "Name",
-    [locale.RU]: "Название"
+    [locales.EN]: "Name",
+    [locales.RU]: "Название"
   },
 
   COUNTRY_FLAG: {
-    [locale.EN]: "Flag",
-    [locale.RU]: "Флаг"
+    [locales.EN]: "Flag",
+    [locales.RU]: "Флаг"
   },
 
   COUNTRY_CAPITAL: {
-    [locale.EN]: "Capital",
-    [locale.RU]: "Столица"
+    [locales.EN]: "Capital",
+    [locales.RU]: "Столица"
   },
 
   COUNTRY_POPULATION: {
-    [locale.EN]: "Population",
-    [locale.RU]: "Население"
+    [locales.EN]: "Population",
+    [locales.RU]: "Население"
   },
 
   NO_DATA_MESSAGE: {
-    [locale.EN]: "No data",
-    [locale.RU]: "Нет данных"
+    [locales.EN]: "No data",
+    [locales.RU]: "Нет данных"
   },
 
   SEARCH: {
-    [locale.EN]: "Search",
-    [locale.RU]: "Поиск"
+    [locales.EN]: "Search",
+    [locales.RU]: "Поиск"
   }
 };

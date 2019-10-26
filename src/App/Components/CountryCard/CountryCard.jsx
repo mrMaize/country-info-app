@@ -20,40 +20,28 @@ function CountryCard({ country, loading, locale }) {
     <>
       {!loading && country ? (
         <div className={"country-card"}>
-          <div className={'card-row'}>
-            <div className={'title'}>
-              {layoutText.COUNTRY_NAME[locale]}:
-            </div>
-            <div className={'content'}>
-              {countryName}
-            </div>
+          <div className={"card-row"}>
+            <div className={"title"}>{layoutText.COUNTRY_NAME[locale]}:</div>
+            <div className={"content"}>{countryName}</div>
           </div>
 
-          <div className={'card-row'}>
-            <div className={'title'}>
-              {layoutText.COUNTRY_FLAG[locale]}:
-            </div>
-            <div className={'content'}>
+          <div className={"card-row"}>
+            <div className={"title"}>{layoutText.COUNTRY_FLAG[locale]}:</div>
+            <div className={"content"}>
               {<img className={"flag"} src={countryFlagUrl} alt={"flag"} />}
             </div>
           </div>
 
-          <div className={'card-row'}>
-            <div className={'title'}>
-              {layoutText.COUNTRY_CAPITAL[locale]}:
-            </div>
-            <div className={'content'}>
-              {countryCapital}
-            </div>
+          <div className={"card-row"}>
+            <div className={"title"}>{layoutText.COUNTRY_CAPITAL[locale]}:</div>
+            <div className={"content"}>{countryCapital}</div>
           </div>
 
-          <div className={'card-row'}>
-            <div className={'title'}>
+          <div className={"card-row"}>
+            <div className={"title"}>
               {layoutText.COUNTRY_POPULATION[locale]}:
             </div>
-            <div className={'content'}>
-              {countryPopulation}
-            </div>
+            <div className={"content"}>{countryPopulation}</div>
           </div>
         </div>
       ) : (
@@ -66,5 +54,5 @@ function CountryCard({ country, loading, locale }) {
 export default connect(state => ({
   country: state.countryData,
   loading: state.loading,
-  locale: state.locale,
+  locale: state.locale
 }))(CountryCard);

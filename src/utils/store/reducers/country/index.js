@@ -6,16 +6,18 @@ import {
   SET_COUNTRY_NAME,
   SET_LOCALE
 } from "../../actionTypes";
-import { locale } from "../../../contants/layout";
+import * as Cookie from "../../../helpers/cookie";
+import { locales } from "../../../contants/layout";
+import { LOCALE } from "../../../contants/locale";
+
+const localeFromCookie = Cookie.getCookie(LOCALE);
 
 const initialState = {
   loading: true,
-  countyData: null,
-  foundCountries: [],
-  locale: locale.RU,
+  countryData: null,
+  locale: localeFromCookie ? locales[localeFromCookie] : locales.RU,
   countryName: "",
-  allCountries: null,
-  countriesByName: null
+  allCountries: null
 };
 
 export default (state = initialState, action) => {

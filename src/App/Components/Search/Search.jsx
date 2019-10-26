@@ -44,7 +44,7 @@ function Search({
 
   const selectCountryCallback = country => () => {
     setDropDownOpen(false);
-    setSearch(country)
+    setSearch(country);
     getCountryInfo(country);
   };
 
@@ -60,11 +60,9 @@ function Search({
           placeholder={layoutText.SEARCH_PLACEHOLDER[locale]}
           type={"text"}
           value={search}
-          // value={search}
           onChange={onchange}
           onClick={() => setDropDownOpen(!dropdownOpen)}
         />{" "}
-        {/*{loading && layoutText.LOADING[locale]}*/}
         {!loading && dropdownOpen && (
           <Dropdown
             selectCountryCallback={selectCountryCallback}
