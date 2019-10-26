@@ -24,14 +24,14 @@ function Search({
   const onchange = event => {
     countryFullNameFragment = event.target.value;
 
-    const availableOptions = allCountries.reduce((newList, currentCountry) => {
+    const availableOptions = allCountries ? allCountries.reduce((newList, currentCountry) => {
       const countryName = currentCountry.name.toUpperCase();
       if (countryName.indexOf(countryFullNameFragment.toUpperCase()) !== -1) {
         return [...newList, countryName];
       } else {
         return newList;
       }
-    }, []);
+    }, []) : [];
 
     setOptions(availableOptions);
 
