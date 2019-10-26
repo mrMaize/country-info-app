@@ -1,11 +1,13 @@
 import React from "react";
-import "./App.css";
-import Search from "./Components/Search";
+import {Layout} from './Components';
+import './App.css';
 
 function App() {
   return (
-    <div>
-      <Search />
+    <div className={'container'}>
+      <Layout.LanguageSelector/>
+      <Layout.Search />
+      <Layout.CountryCard />
     </div>
   );
 }

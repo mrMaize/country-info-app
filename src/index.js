@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./App/index.css";
 import App from "./App/App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import { createLogger } from "redux-logger";
-import reducer from './utils/store/reducers'
+import reducer from "./utils/store/reducers/country";
+import thunk from "redux-thunk";
 
 const middleware = [
   createLogger({
@@ -17,10 +17,13 @@ const middleware = [
       title: () => "#299bd8",
       nextState: () => "#299bd8"
     }
-  })
+  }),
+  thunk
 ];
 
 const store = createStore(reducer, applyMiddleware(...middleware));
+
+
 
 ReactDOM.render(
   <Provider store={store}>
