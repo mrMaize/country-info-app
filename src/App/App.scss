@@ -67,6 +67,14 @@
       .flag {
         width: 50px;
       }
+
+      img {
+        width: 50px;
+        height: 30px;
+        background: url(../utils/assets/images/loading.gif) 50% no-repeat;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
     }
 
     .language-selector {
