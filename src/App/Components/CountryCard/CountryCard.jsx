@@ -1,15 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { layoutText } from "../../../utils/contants/layout";
+import "../../App.scss";
 
-function CountryCard({ country, loading, locale }) {
-  let countryName = "";
+function CountryCard({ country, loading, locale, countryName }) {
   let countryCapital = "";
   let countryPopulation = "";
   let countryFlagUrl = "";
 
   if (country) {
-    countryName = country.name;
     countryCapital = country.capital;
     countryPopulation = country.population;
     countryFlagUrl = country.flag;
@@ -18,21 +17,43 @@ function CountryCard({ country, loading, locale }) {
   return (
     <>
       {!loading && country ? (
-        <>
-          <div>
-            {layoutText.COUNTRY_NAME[locale]}: {countryName}
+        <div className={"country-card"}>
+          <div className={'card-row'}>
+            <div className={'title'}>
+              {layoutText.COUNTRY_NAME[locale]}:
+            </div>
+            <div className={'content'}>
+              {countryName}
+            </div>
           </div>
-          <div>
-            {layoutText.COUNTRY_FLAG[locale]}:{" "}
-            {<img src={countryFlagUrl} alt={"flag"} />}
+
+          <div className={'card-row'}>
+            <div className={'title'}>
+              {layoutText.COUNTRY_FLAG[locale]}:
+            </div>
+            <div className={'content'}>
+              {<img className={"flag"} src={countryFlagUrl} alt={"flag"} />}
+            </div>
           </div>
-          <div>
-            {layoutText.COUNTRY_CAPITAL[locale]}: {countryCapital}
+
+          <div className={'card-row'}>
+            <div className={'title'}>
+              {layoutText.COUNTRY_CAPITAL[locale]}:
+            </div>
+            <div className={'content'}>
+              {country.capital}
+            </div>
           </div>
-          <div>
-            {layoutText.COUNTRY_POPULATION[locale]}: {countryPopulation} чел
+
+          <div className={'card-row'}>
+            <div className={'title'}>
+              {layoutText.COUNTRY_POPULATION[locale]}:
+            </div>
+            <div className={'content'}>
+              {countryPopulation}
+            </div>
           </div>
-        </>
+        </div>
       ) : (
         <div>{layoutText.NO_DATA_MESSAGE[locale]}</div>
       )}
@@ -43,5 +64,6 @@ function CountryCard({ country, loading, locale }) {
 export default connect(state => ({
   country: state.countryData,
   loading: state.loading,
-  locale: state.locale
+  locale: state.locale,
+  countryName: state.countryName
 }))(CountryCard);

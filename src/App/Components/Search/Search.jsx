@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { layoutText } from "../../../utils/contants/layout";
 import {
   findCountryDataByNameFragment,
-  loadAllCountries
+  loadAllCountryNames
 } from "../../../utils/store/thunk";
-import "./Search.scss";
+import "../../App.scss";
 import Dropdown from "./Dropdown/Dropdown";
 
 function Search({
@@ -38,36 +38,28 @@ function Search({
     !dropdownOpen && setDropDownOpen(true);
   };
 
-  const onSearchCountry = () => {
-    getCountryInfo(countryFullNameFragment);
-  };
-
   const selectCountryCallback = country => () => {
-    console.log(country);
+    setDropDownOpen(false);
+    getCountryInfo(country);
   };
 
   useEffect(() => {
     !allCountries && loadCountries();
   });
 
-  console.log("dropdownOpen:  ", dropdownOpen);
-
   return (
     <>
-      <div className={"search-container"}>
-        <div>
-          <input
-            placeholder={layoutText.SEARCH_PLACEHOLDER[locale]}
-            type={"text"}
-            defaultValue={countryName}
-            onChange={onchange}
-            onClick={() => setDropDownOpen(!dropdownOpen)}
-            onBlur={() => setDropDownOpen(false)}
-          />{" "}
-          {loading && <h1>{layoutText.LOADING[locale]}</h1>}
-          <button onClick={onSearchCountry}>{layoutText.SEARCH[locale]}</button>
-        </div>
-
+      <div className={'search-container'}>
+        <input
+          className={'search-input'}
+          placeholder={layoutText.SEARCH_PLACEHOLDER[locale]}
+          type={"text"}
+          defaultValue={countryName}
+          onChange={onchange}
+          onClick={() => setDropDownOpen(!dropdownOpen)}
+          // onBlur={() => setDropDownOpen(false)}
+        />{" "}
+        {loading && <h1>{layoutText.LOADING[locale]}</h1>}
         {!loading && dropdownOpen && (
           <Dropdown
             selectCountryCallback={selectCountryCallback}
@@ -87,7 +79,7 @@ export default connect(
     allCountries: state.allCountries
   }),
   dispatch => ({
-    loadCountries: () => dispatch(loadAllCountries()),
+    loadCountries: () => dispatch(loadAllCountryNames()),
     getCountryInfo: countryFullNameFragment =>
       dispatch(findCountryDataByNameFragment(countryFullNameFragment))
   })

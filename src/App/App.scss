@@ -1,0 +1,73 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+
+  .container {
+    flex-basis: 50%;
+    padding: 5px 50px 10px 50px;
+    box-shadow: 0 0 2px lightgray;
+
+    .search-container {
+      display: flex;
+      flex-direction: column;
+
+      .search-input {
+        font-size: 16px;
+        display: flex;
+        flex-basis: 100%;
+      }
+
+      .countries-list-container {
+        background: white;
+        max-height: 150px;
+        overflow: auto;
+        box-shadow: 0 0 2px lightgrey;
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+
+        .countries-list-option:hover {
+          background: lightskyblue;
+          cursor: pointer;
+        }
+
+        .countries-list-option {
+          padding: 2px;
+        }
+      }
+    }
+
+    .country-card {
+      box-shadow: 0 0 2px lightgray;
+      padding: 10px;
+      margin-top: 10px;
+
+      .card-row {
+        display: flex;
+        flex-direction: row;
+        flex-basis: 50%;
+        padding: 10px 0 10px 0;
+
+        .title {
+          justify-content: left;
+          flex-basis: 30%;
+        }
+
+        .content {
+          justify-content: left;
+          flex-basis: 70%;
+          color: grey;
+        }
+      }
+
+      .flag {
+        width: 50px;
+      }
+    }
+
+    .language-selector {
+      width: 50px;
+      margin-bottom: 20px;
+    }
+  }
+}

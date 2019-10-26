@@ -1,15 +1,13 @@
 import React from "react";
-import {Layout} from './Components';
-import './App.css';
+import { Layout } from "./Components";
+import "./App.scss";
 
-function App() {
-  return (
+export default () => (
+  <div className={'main-container'}>
     <div className={'container'}>
-      <Layout.LanguageSelector/>
+      <Layout.LanguageSelector />
       <Layout.Search />
       <Layout.CountryCard />
     </div>
-  );
-}
-
-export default App;
+  </div>
+);

@@ -23,8 +23,6 @@ const middleware = [
 
 const store = createStore(reducer, applyMiddleware(...middleware));
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

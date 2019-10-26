@@ -1,13 +1,18 @@
 import React from "react";
 import uniqueId from "../../../../utils/helpers/uniqueId";
+import "../../../App.scss";
 
 export default ({ options, selectCountryCallback }) => {
   return (
     <>
       {options.length === 0 ? null : (
-        <div>
+        <div className={"countries-list-container"}>
           {options.map(option => (
-            <div key={uniqueId()} onClick={selectCountryCallback(option)}>
+            <div
+              className={"countries-list-option"}
+              key={uniqueId()}
+              onClick={selectCountryCallback(option)}
+            >
               {option}
             </div>
           ))}

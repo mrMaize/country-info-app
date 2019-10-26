@@ -1,19 +1,22 @@
 import {
   setCountriesData,
+  setCountryData,
   setCountryName,
   setLoadingOff,
   setLoadingOn
 } from "../actions";
 import { getAllCountries, getCountriesByName } from "../../api/requests";
 
-export const findCountryDataByNameFragment = countryFullNameFragment => {
+export const findCountryDataByNameFragment = countryName => {
   return async dispatch => {
-    dispatch(setCountryName(countryFullNameFragment));
+    dispatch(setCountryName(countryName));
     dispatch(setLoadingOn());
 
     try {
-      const countriesFound = await getCountriesByName(countryFullNameFragment);
-      dispatch(setCountriesData(countriesFound));
+      const countries = await getCountriesByName(countryName);
+      const country = countries[0];
+
+      dispatch(setCountryData(country));
     } catch (error) {
       dispatch(setLoadingOff());
       console.log(error.message);
@@ -21,7 +24,7 @@ export const findCountryDataByNameFragment = countryFullNameFragment => {
   };
 };
 
-export const loadAllCountries = () => {
+export const loadAllCountryNames = () => {
   return async dispatch => {
     try {
       const allCountries = await getAllCountries();

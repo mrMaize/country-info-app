@@ -3,7 +3,8 @@ import {
   SET_COUNTRIES_DATA,
   SET_COUNTRIES_LOADING_OFF,
   SET_COUNTRIES_LOADING_ON,
-  SET_COUNTRY_DATA, SET_COUNTRY_NAME,
+  SET_COUNTRY_DATA,
+  SET_COUNTRY_NAME,
   SET_LOCALE
 } from "../../actionTypes";
 import { locale } from "../../../contants/layout";
@@ -13,10 +14,9 @@ const initialState = {
   countyData: null,
   foundCountries: [],
   locale: locale.RU,
-  countryName: '',
+  countryName: "",
   allCountries: null,
-  countriesByName: null,
-
+  countriesByName: null
 };
 
 export default (state = initialState, action) => {
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         countryName: action.countryName
-      }
+      };
     }
 
     case SET_COUNTRIES_LOADING_ON: {
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
         ...state,
         allCountries: action.countriesData,
         loading: false
-      }
+      };
     }
 
     default: {
