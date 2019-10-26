@@ -3,7 +3,7 @@ import { API_HOST, requestTypes } from "./config";
 
 export const getCountriesByName = (partialOrFullName = "") =>
   sendRequest(requestTypes.GET, {
-    url: `${API_HOST}/name/${partialOrFullName}?fields=flag;population;capital`
+    url: `${API_HOST}/name/${partialOrFullName}?fields=name;flag;population;capital`
   });
 
 export const getCountryFlag = url =>

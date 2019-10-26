@@ -3,15 +3,17 @@ import { connect } from "react-redux";
 import { layoutText } from "../../../utils/contants/layout";
 import "../../App.scss";
 
-function CountryCard({ country, loading, locale, countryName }) {
+function CountryCard({ country, loading, locale }) {
   let countryCapital = "";
   let countryPopulation = "";
   let countryFlagUrl = "";
+  let countryName = "";
 
   if (country) {
     countryCapital = country.capital;
     countryPopulation = country.population;
     countryFlagUrl = country.flag;
+    countryName = country.name;
   }
 
   return (
@@ -41,7 +43,7 @@ function CountryCard({ country, loading, locale, countryName }) {
               {layoutText.COUNTRY_CAPITAL[locale]}:
             </div>
             <div className={'content'}>
-              {country.capital}
+              {countryCapital}
             </div>
           </div>
 
@@ -65,5 +67,4 @@ export default connect(state => ({
   country: state.countryData,
   loading: state.loading,
   locale: state.locale,
-  countryName: state.countryName
 }))(CountryCard);
