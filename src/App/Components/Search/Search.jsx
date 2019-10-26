@@ -18,28 +18,33 @@ function Search({
 }) {
   const [dropdownOpen, setDropDownOpen] = useState(false);
   const [options, setOptions] = useState([]);
+  const [search, setSearch] = useState(countryName);
 
   let countryFullNameFragment = countryName;
 
   const onchange = event => {
     countryFullNameFragment = event.target.value;
-
-    const availableOptions = allCountries ? allCountries.reduce((newList, currentCountry) => {
-      const countryName = currentCountry.name.toUpperCase();
-      if (countryName.indexOf(countryFullNameFragment.toUpperCase()) !== -1) {
-        return [...newList, countryName];
-      } else {
-        return newList;
-      }
-    }, []) : [];
+    setSearch(countryFullNameFragment);
+    const availableOptions = allCountries
+      ? allCountries.reduce((newList, currentCountry) => {
+          const countryName = currentCountry.name.toUpperCase();
+          if (
+            countryName.indexOf(countryFullNameFragment.toUpperCase()) !== -1
+          ) {
+            return [...newList, countryName];
+          } else {
+            return newList;
+          }
+        }, [])
+      : [];
 
     setOptions(availableOptions);
-
     !dropdownOpen && setDropDownOpen(true);
   };
 
   const selectCountryCallback = country => () => {
     setDropDownOpen(false);
+    setSearch(country)
     getCountryInfo(country);
   };
 
@@ -49,17 +54,17 @@ function Search({
 
   return (
     <>
-      <div className={'search-container'}>
+      <div className={"search-container"}>
         <input
-          className={'search-input'}
+          className={"search-input"}
           placeholder={layoutText.SEARCH_PLACEHOLDER[locale]}
           type={"text"}
-          defaultValue={countryName}
+          value={search}
+          // value={search}
           onChange={onchange}
           onClick={() => setDropDownOpen(!dropdownOpen)}
-          // onBlur={() => setDropDownOpen(false)}
         />{" "}
-        {loading && <h1>{layoutText.LOADING[locale]}</h1>}
+        {/*{loading && layoutText.LOADING[locale]}*/}
         {!loading && dropdownOpen && (
           <Dropdown
             selectCountryCallback={selectCountryCallback}
