@@ -21,14 +21,13 @@
 
       .countries-list-container {
         background: white;
+        min-height: 150px;
         max-height: 150px;
-        margin-bottom: -150px;
-
+        z-index: 100;
         overflow: auto;
         box-shadow: 0 0 2px lightgrey;
-        display: flex;
-        flex-direction: column;
         flex-basis: 100%;
+        margin-bottom: -150px;
 
         .countries-list-option:hover {
           background: lightskyblue;
