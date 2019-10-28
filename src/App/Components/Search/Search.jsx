@@ -29,7 +29,7 @@ function Search({
       ? allCountries.reduce((newList, currentCountry) => {
           const countryName = currentCountry.name.toUpperCase();
           if (
-            countryName.indexOf(countryFullNameFragment.toUpperCase()) !== -1
+            countryName.indexOf(countryFullNameFragment.toUpperCase()) === 0
           ) {
             return [...newList, countryName];
           } else {
