@@ -1,37 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { layoutText } from "../../../utils/contants/layout";
-import {
-  findCountryDataByNameFragment,
-  loadAllCountryNames
-} from "../../../utils/store/thunk";
+import { findCountriesDataByNameFragment } from "../../../utils/store/thunk";
 import "../../App.scss";
 import Dropdown from "./Dropdown/Dropdown";
+import { setCurrentCountry } from "../../../utils/store/actions";
 
 function Search({
-  loading,
   locale,
-  getCountryInfo,
+  loading,
+  currentCountry,
   countryName,
-  loadCountries,
-  allCountries
+  setCurrentCountry,
+  availableCountries,
+  findCountriesBuNameFragment
 }) {
   const [dropdownOpen, setDropDownOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [search, setSearch] = useState(countryName);
 
-  let countryFullNameFragment = countryName;
+  const onchange = ({ target }) => {
+    let countryFullNameFragment = target.value;
 
-  const onchange = event => {
-    countryFullNameFragment = event.target.value;
+    findCountriesBuNameFragment(countryFullNameFragment);
+
     setSearch(countryFullNameFragment);
-    const availableOptions = allCountries
-      ? allCountries.reduce((newList, currentCountry) => {
-          const countryName = currentCountry.name.toUpperCase();
+  };
+
+  const selectCountryCallback = country => () => {
+    setDropDownOpen(false);
+    setCurrentCountry(country);
+  };
+
+  useEffect(() => {
+    if (currentCountry) {
+      setSearch(currentCountry.name);
+    }
+  }, [currentCountry]);
+
+  useEffect(() => {
+    const availableOptions = availableCountries
+      ? availableCountries.reduce((newList, currentCountry) => {
           if (
-            countryName.indexOf(countryFullNameFragment.toUpperCase()) === 0
+            currentCountry.name.toUpperCase().indexOf(search.toUpperCase()) ===
+            0
           ) {
-            return [...newList, countryName];
+            return [...newList, currentCountry];
           } else {
             return newList;
           }
@@ -40,33 +54,25 @@ function Search({
 
     setOptions(availableOptions);
     !dropdownOpen && setDropDownOpen(true);
-  };
-
-  const selectCountryCallback = country => () => {
-    setDropDownOpen(false);
-    setSearch(country);
-    getCountryInfo(country);
-  };
-
-  useEffect(() => {
-    !allCountries && loadCountries();
-  });
+  }, [availableCountries]);
 
   return (
     <>
       <div className={"search-container"}>
         <input
-          className={"search-input"}
+          className={`search-input`}
           placeholder={layoutText.SEARCH_PLACEHOLDER[locale]}
           type={"text"}
           value={search}
           onChange={onchange}
           onClick={() => setDropDownOpen(!dropdownOpen)}
         />{" "}
-        {!loading && dropdownOpen && (
+        {dropdownOpen && Boolean(options.length) && (
           <Dropdown
             selectCountryCallback={selectCountryCallback}
+            loading={loading}
             options={options}
+            noOptionsMessage={layoutText.NOTHING_FOUND[locale]}
           />
         )}
       </div>
@@ -75,15 +81,26 @@ function Search({
 }
 
 export default connect(
-  state => ({
-    loading: state.loading,
-    locale: state.locale,
-    countryName: state.countryName,
-    allCountries: state.allCountries
-  }),
+  state => {
+    const {
+      loading,
+      locale,
+      currentCountry,
+      allCountries,
+      availableCountries
+    } = state;
+
+    return {
+      loading,
+      locale,
+      currentCountry,
+      allCountries,
+      availableCountries
+    };
+  },
   dispatch => ({
-    loadCountries: () => dispatch(loadAllCountryNames()),
-    getCountryInfo: countryFullNameFragment =>
-      dispatch(findCountryDataByNameFragment(countryFullNameFragment))
+    setCurrentCountry: country => dispatch(setCurrentCountry(country)),
+    findCountriesBuNameFragment: fragment =>
+      dispatch(findCountriesDataByNameFragment(fragment))
   })
 )(Search);

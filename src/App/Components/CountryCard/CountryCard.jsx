@@ -3,22 +3,15 @@ import { connect } from "react-redux";
 import { layoutText } from "../../../utils/contants/layout";
 import "../../App.scss";
 
-function CountryCard({ country, loading, locale }) {
-  let countryCapital = "";
-  let countryPopulation = "";
-  let countryFlagUrl = "";
-  let countryName = "";
-
-  if (country) {
-    countryCapital = country.capital;
-    countryPopulation = country.population;
-    countryFlagUrl = country.flag;
-    countryName = country.name;
-  }
+function CountryCard({ country, locale }) {
+  let countryCapital = (country && country.capital) || "";
+  let countryPopulation = (country && country.population) || "";
+  let countryFlagUrl = (country && country.flag) || "";
+  let countryName = (country && country.name) || "";
 
   return (
     <>
-      {!loading && country ? (
+      {country && (
         <div className={"country-card"}>
           <div className={"card-row"}>
             <div className={"title"}>{layoutText.COUNTRY_NAME[locale]}:</div>
@@ -44,15 +37,13 @@ function CountryCard({ country, loading, locale }) {
             <div className={"content"}>{countryPopulation}</div>
           </div>
         </div>
-      ) : (
-        <div>{layoutText.NO_DATA_MESSAGE[locale]}</div>
       )}
     </>
   );
 }
 
 export default connect(state => ({
-  country: state.countryData,
+  country: state.currentCountry,
   loading: state.loading,
   locale: state.locale
 }))(CountryCard);

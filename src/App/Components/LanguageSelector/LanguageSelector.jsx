@@ -4,7 +4,7 @@ import { setLocale } from "../../../utils/store/actions";
 import "../../App.scss";
 import * as Cookie from "../../../utils/helpers/cookie";
 import { LOCALE } from "../../../utils/contants/locale";
-import {locales} from "../../../utils/contants/layout";
+import { locales } from "../../../utils/contants/layout";
 
 export default connect(
   state => ({ locale: state.locale }),

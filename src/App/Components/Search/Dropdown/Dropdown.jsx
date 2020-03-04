@@ -3,9 +3,12 @@ import uniqueId from "../../../../utils/helpers/uniqueId";
 import "../../../App.scss";
 
 export default ({ options, selectCountryCallback }) => {
+  console.log(`options set changed...`);
+  console.log(`options are :`, options);
+
   return (
     <>
-      {options.length === 0 ? null : (
+      {!Boolean(options.length) ? null : (
         <div className={"countries-list-container"}>
           {options.map(option => (
             <div
@@ -13,7 +16,7 @@ export default ({ options, selectCountryCallback }) => {
               key={uniqueId()}
               onClick={selectCountryCallback(option)}
             >
-              {option}
+              {option.name}
             </div>
           ))}
         </div>

@@ -1,9 +1,10 @@
 import {
+  SET_AVAILABLE_COUNTRIES,
   SET_COUNTRIES_DATA,
   SET_COUNTRIES_LOADING_OFF,
   SET_COUNTRIES_LOADING_ON,
-  SET_COUNTRY_DATA,
   SET_COUNTRY_NAME,
+  SET_CURRENT_COUNTRY,
   SET_LOCALE
 } from "../../actionTypes";
 import * as Cookie from "../../../helpers/cookie";
@@ -13,11 +14,10 @@ import { LOCALE } from "../../../contants/locale";
 const localeFromCookie = Cookie.getCookie(LOCALE);
 
 const initialState = {
-  loading: true,
-  countryData: null,
   locale: localeFromCookie ? locales[localeFromCookie] : locales.RU,
-  countryName: "",
-  allCountries: null
+  loading: false,
+  availableCountries: [],
+  currentCountry: null
 };
 
 export default (state = initialState, action) => {
@@ -26,14 +26,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         locale: action.locale
-      };
-    }
-
-    case SET_COUNTRY_DATA: {
-      return {
-        ...state,
-        countryData: action.countryData,
-        loading: false
       };
     }
 
@@ -63,6 +55,21 @@ export default (state = initialState, action) => {
         ...state,
         allCountries: action.countriesData,
         loading: false
+      };
+    }
+
+    case SET_AVAILABLE_COUNTRIES: {
+      return {
+        ...state,
+        availableCountries: action.availableCountries,
+        loading: false
+      };
+    }
+
+    case SET_CURRENT_COUNTRY: {
+      return {
+        ...state,
+        currentCountry: action.currentCountry
       };
     }
 

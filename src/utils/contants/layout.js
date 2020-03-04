@@ -39,7 +39,7 @@ export const layoutText = {
     [locales.RU]: "Население"
   },
 
-  NO_DATA_MESSAGE: {
+  NO_DATA_MESSAGENO_DATA_MESSAGE: {
     [locales.EN]: "No data",
     [locales.RU]: "Нет данных"
   },
@@ -47,5 +47,10 @@ export const layoutText = {
   SEARCH: {
     [locales.EN]: "Search",
     [locales.RU]: "Поиск"
+  },
+
+  NOTHING_FOUND: {
+    [locales.EN]: "Nothing found",
+    [locales.RU]: "Ничего не найдено"
   }
 };
