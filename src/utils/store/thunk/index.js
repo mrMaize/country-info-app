@@ -1,36 +1,28 @@
 import {
-  setCountriesData,
-  setCountryData,
+  setAvailableCountries,
   setCountryName,
   setLoadingOff,
   setLoadingOn
 } from "../actions";
-import { getAllCountries, getCountriesByName } from "../../api/requests";
+import { getCountriesByName } from "../../api/requests";
 
-export const findCountryDataByNameFragment = countryName => {
+export const findCountriesDataByNameFragment = countryName => {
   return async dispatch => {
-    dispatch(setCountryName(countryName));
-    dispatch(setLoadingOn());
+    if (!Boolean(countryName)) {
+      dispatch(setCountryName(countryName));
+      dispatch(setAvailableCountries([]));
+    } else {
+      dispatch(setCountryName(countryName));
+      dispatch(setLoadingOn());
 
-    try {
-      const countries = await getCountriesByName(countryName);
-      const country = countries[0];
-
-      dispatch(setCountryData(country));
-    } catch (error) {
-      dispatch(setLoadingOff());
-      console.log(error.message);
-    }
-  };
-};
-
-export const loadAllCountryNames = () => {
-  return async dispatch => {
-    try {
-      const allCountries = await getAllCountries();
-      dispatch(setCountriesData(allCountries));
-    } catch (error) {
-      dispatch(setLoadingOff());
+      try {
+        const countries = await getCountriesByName(countryName);
+        dispatch(setAvailableCountries(countries));
+      } catch (error) {
+        dispatch(setLoadingOff());
+        dispatch(setAvailableCountries([]));
+        console.log(error.message);
+      }
     }
   };
 };
